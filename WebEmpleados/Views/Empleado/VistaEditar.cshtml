@@ -1,0 +1,90 @@
+﻿@using WebEmpleados.Models
+
+@model Empleado
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VistaEditar</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="display-2">Formulario Empleados</h1>
+
+        <form action="/Empleado/EditarPOST" method="post">
+
+            <input type="hidden" name="idEmpleado" value="@Model.idEmpleado"/>
+
+            <div class="mb-3">
+                <label class="form-label"> Nombre </label>
+                <input type="text" name="nombre" class="form-control" required value="@Model.nombre" />
+            </div>
+
+
+            <label class="form-label">Sueldo</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text">$</span>
+                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="sueldo" required value="@Model.sueldo">
+                <span class="input-group-text">.00</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <input type="date" name="fechaNacimiento" class="form-control" required value="@Model.fechaNacimiento.ToString("yyyy-MM-dd")" />
+            </div>
+
+            <div class="mb-3">
+                <label>Tiempo Completo</label>
+                <div>
+                    <!-- Radio Button -->
+                    @*@if (Model.tiempoCompleto)
+                        {
+                            <div>
+                                <input type="radio" name="tiempoCompleto" value="true" checked required />
+                                <label>Si</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="tiempoCompleto" value="false" />
+                                <label>No</label>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div>
+                                <input type="radio" name="tiempoCompleto" value="true"  required />
+                                <label>Si</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="tiempoCompleto" value="false" checked/>
+                                <label>No</label>
+                            </div>
+                        }*@
+
+                    <div>
+                        <input type="radio" name="tiempoCompleto" value="true" required @(Model.tiempoCompleto == true ? "checked" : "") />
+                        <label>Si</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="tiempoCompleto" value="false" @(Model.tiempoCompleto == true ? "" : "checked") />
+                        <label>No</label>
+                    </div>
+
+
+                </div>
+            </div>
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <a href="/Empleado/Index" class="btn btn-primary">Regresar</a>
+        </form>
+
+    </div>
+</body>
+</html>
